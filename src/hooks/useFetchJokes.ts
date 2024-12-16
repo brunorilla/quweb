@@ -1,6 +1,16 @@
 import {useQuery} from '@tanstack/react-query';
-import {fetchJokes} from '../services/jokesService';
+import {fetchJokes} from '@/services';
 
-export const useFetchJokes = () => {
-    return useQuery(['jokes'], fetchJokes);
+
+/**
+ * Custom hook to fetch jokes.
+ *
+ * @param {number} count - Number of jokes to fetch.
+ */
+export const useJokesQuery = (count: number) => {
+    return useQuery({
+        queryKey: ['jokes', count],
+        queryFn: () => fetchJokes(count),
+        staleTime: 1000 * 60,
+    });
 };

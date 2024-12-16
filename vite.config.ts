@@ -5,4 +5,13 @@ import tsconfigPaths from "vite-tsconfig-paths"
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
+    resolve: {
+        alias: {
+            '@components': '/src/components',
+            '@routes': '/src/routes',
+            '@utils': '/src/utils',
+            '@services': '/src/services',
+            '@hooks': '/src/hooks',
+        }
+    }
 })

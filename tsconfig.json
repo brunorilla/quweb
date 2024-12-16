@@ -5,7 +5,8 @@
       "@components/*": ["components/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "files": [],

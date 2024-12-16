@@ -1,16 +1,11 @@
-import { Box, Spinner } from '@chakra-ui/react';
-import { useFetchJokes } from '../hooks/useFetchJokes';
-import JokesList from '../components/JokesList';
+import {Box} from '@chakra-ui/react';
+import {JokesList} from '@/components';
 
 const Home = () => {
-    const { data: jokes, isLoading, isError } = useFetchJokes();
-
-    if (isLoading) return <Spinner />;
-    if (isError) return <Box>Error fetching jokes.</Box>;
 
     return (
         <Box p={8}>
-            <JokesList jokes={jokes} />
+            <JokesList/>
         </Box>
     );
 };
