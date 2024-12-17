@@ -1,8 +1,8 @@
-import { useState } from "react";
-import {SimpleGrid, Spinner, Input, Button, Text, Box} from "@chakra-ui/react";
-import { BasicSelect, JokeCard } from "@/components";
+import {useState} from "react";
+import {SimpleGrid, Spinner, Input, Text, Box, Center} from "@chakra-ui/react";
+import {BasicSelect, JokeCard} from "@/components";
 import styled from "styled-components";
-import { useJokesQuery } from "@/hooks";
+import {useJokesQuery} from "@/hooks";
 
 
 export const JokesList = () => {
@@ -12,7 +12,7 @@ export const JokesList = () => {
     const [fetchCount, setFetchCount] = useState(10);
     const itemsPerPage = 6;
 
-    const { data: jokes = [], isLoading } = useJokesQuery(fetchCount);
+    const {data: jokes = [], isLoading} = useJokesQuery(fetchCount);
 
     const sortedJokes = [...jokes].sort((a, b) => {
         if (sortBy === "id") return a.id - b.id;
@@ -25,8 +25,8 @@ export const JokesList = () => {
     );
 
     const sortOptions: { value: "id" | "type"; label: string }[] = [
-        { value: "id", label: "Sort by ID" },
-        { value: "type", label: "Sort by Type" },
+        {value: "id", label: "Sort by ID"},
+        {value: "type", label: "Sort by Type"},
     ];
 
     const handleSelect = (value: string) => {
@@ -48,7 +48,7 @@ export const JokesList = () => {
     };
 
     if (isLoading) {
-        return <Spinner />;
+        return <Spinner/>;
     }
 
     return (
@@ -81,29 +81,40 @@ export const JokesList = () => {
                     </Text>
                 )}
             </Box>
-
-            <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
-                {paginatedJokes.map((joke) => (
-                    <JokeCard key={joke.id} setup={joke.setup} punchline={joke.punchline} />
-                ))}
-            </SimpleGrid>
-
-            <StyledButton
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-            >
-                Previous
-            </StyledButton>
-            <StyledButton
-                onClick={() =>
-                    setCurrentPage((prev) =>
-                        prev < Math.ceil(jokes.length / itemsPerPage) ? prev + 1 : prev
-                    )
-                }
-                disabled={currentPage === Math.ceil(jokes.length / itemsPerPage)}
-            >
-                Next
-            </StyledButton>
+            <Box minH="400px"
+                 display="flex"
+                 flexDirection="column"
+                 justifyContent="space-between"
+                 alignItems="center"
+                 mb={4}>
+                <SimpleGrid columns={{base: 1, md: 2}} gap={4}>
+                    {paginatedJokes.length > 0 ? (
+                        paginatedJokes.map((joke) => (
+                            <JokeCard key={joke.id} setup={joke.setup} punchline={joke.punchline}/>
+                        ))
+                    ) : (
+                        <Text>No jokes available!</Text>
+                    )}
+                </SimpleGrid>
+            </Box>
+            <Center>
+                <StyledButton
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </StyledButton>
+                <StyledButton
+                    onClick={() =>
+                        setCurrentPage((prev) =>
+                            prev < Math.ceil(jokes.length / itemsPerPage) ? prev + 1 : prev
+                        )
+                    }
+                    disabled={currentPage === Math.ceil(jokes.length / itemsPerPage)}
+                >
+                    Next
+                </StyledButton>
+            </Center>
         </>
     );
 };

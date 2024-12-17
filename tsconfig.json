@@ -7,7 +7,11 @@
       "@utils/*": ["utils/*"],
       "@services/*": ["services/*"],
       "@hooks/*": ["hooks/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "resolveJsonModule": true
+
   },
   "files": [],
   "references": [

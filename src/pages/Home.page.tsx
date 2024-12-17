@@ -1,4 +1,4 @@
-import {Box, Flex, Heading, Icon} from '@chakra-ui/react';
+import {Box, Flex, Heading} from '@chakra-ui/react';
 import {AnimatedIcon, JokesList} from '@/components';
 
 
@@ -11,8 +11,6 @@ const Home = () => {
                 </Heading>
                 <AnimatedIcon/>
             </Flex>
-
-
             <JokesList />
         </Box>
     );
