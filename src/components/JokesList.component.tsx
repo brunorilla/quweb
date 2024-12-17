@@ -10,7 +10,7 @@ export const JokesList = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [jokeCount, setJokeCount] = useState(10);
     const [fetchCount, setFetchCount] = useState(10);
-    const itemsPerPage = 5;
+    const itemsPerPage = 6;
 
     const { data: jokes = [], isLoading } = useJokesQuery(fetchCount);
 
@@ -34,8 +34,8 @@ export const JokesList = () => {
     };
 
     const handleJokeCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.min(1000, Math.max(1, parseInt(e.target.value) || 0));
-        setJokeCount(value);
+        const value = e.target.value === "" ? "" : Math.min(1000, Math.max(1, parseInt(e.target.value) || 0));
+        setJokeCount(value as number); // Allow empty input temporarily
     };
 
     const handleFetchJokes = () => {
@@ -63,18 +63,16 @@ export const JokesList = () => {
                 type="number"
                 placeholder="Number of jokes"
                 maxW="200px"
-                value={jokeCount}
+                value={jokeCount || ""}
                 onChange={handleJokeCountChange}
                 mb={4}
             />
 
-            <Button
+            <StyledButton
                 onClick={handleFetchJokes}
-                colorScheme="blue"
-                mb={4}
             >
-                Fetch Jokes
-            </Button>
+                Make me laugh!
+            </StyledButton>
 
             <Box height="20px" mb={4}>
                 {jokeCount > 250 && (
